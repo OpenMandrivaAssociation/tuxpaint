@@ -27,7 +27,7 @@ filesystem isn't exposed (much like programs on PDAs).
 %prep
 %setup -q 
 %patch2 -p0 -b .saispo
-rm -rf `find -name CVS`
+sed -i -e 's|-I/usr/lib/glib-2.0|-I/usr/%{_lib}/glib-2.0|' Makefile
 
 %build
 make OPTFLAGS="%{optflags}" PREFIX=%{_prefix}
