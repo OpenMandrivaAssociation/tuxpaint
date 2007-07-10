@@ -10,10 +10,9 @@ Patch2:		tuxpaint-0.9.15b-lin_with_libpng.diff
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:  png-devel freetype2-devel
-BuildRequires:	gettext kdelibs-common mandriva-create-kde-mdk-menu
+BuildRequires:  png-devel freetype2-devel cairo-devel librsvg-devel
+BuildRequires:	gettext desktop-file-utils
 BuildRequires:	SDL-devel SDL_mixer-devel SDL_ttf-devel SDL_image-devel
-BuildRequires:  desktop-file-utils mandriva-create-kde-mdk-menu
 #for printing:
 Requires: 	netpbm
 
@@ -31,7 +30,7 @@ filesystem isn't exposed (much like programs on PDAs).
 rm -rf `find -name CVS`
 
 %build
-%make OPTFLAGS="%{optflags}" PREFIX=/usr
+%make OPTFLAGS="%{optflags}" PREFIX=%{_prefix}
 
 %install
 rm -rf %{buildroot}
@@ -43,7 +42,7 @@ make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}"
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install	--vendor="" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications \
-			--add-category="X-MandrivaLinux-Multimedia-Graphics" \
+			--add-category="Education;Art;" \
 			src/tuxpaint.desktop
 
 install -m644 data/images/icon16x16.png -D %{buildroot}%{_miconsdir}/%{name}.png
@@ -51,6 +50,7 @@ install -m644 data/images/icon32x32.png -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 data/images/icon48x48.png -D %{buildroot}%{_liconsdir}/%{name}.png
 
 #rm -f $RPM_BUILD_ROOT/%_datadir/%name/images/icon*x*.png $RPM_BUILD_ROOT/%_datadir/%{name}/images/icon-win32.png
+rm -Rf %{buildroot}%{_datadir}/applnk
 
 #Fix perms:
 chmod -R go+r docs/
@@ -82,8 +82,6 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
 %{_datadir}/%{name}
-%{_datadir}/applnk/Graphics/tuxpaint.desktop
-#%{_datadir}/gnome/apps/Graphics/tuxpaint.desktop
 %{_datadir}/applications/tuxpaint.desktop
 %{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/pixmaps/*png
