@@ -11,7 +11,7 @@ Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:  png-devel freetype2-devel cairo-devel librsvg-devel
-BuildRequires:	gettext desktop-file-utils
+BuildRequires:	gettext desktop-file-utils libpaper-devel
 BuildRequires:	SDL-devel SDL_mixer-devel SDL_ttf-devel SDL_image-devel
 #for printing:
 Requires: 	netpbm
@@ -30,7 +30,7 @@ filesystem isn't exposed (much like programs on PDAs).
 rm -rf `find -name CVS`
 
 %build
-%make OPTFLAGS="%{optflags}" PREFIX=%{_prefix}
+make OPTFLAGS="%{optflags}" PREFIX=%{_prefix}
 
 %install
 rm -rf %{buildroot}
