@@ -1,13 +1,11 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
-Version:	0.9.16
+Version:	0.9.17
 Release:	%mkrel 1
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPL
 Source: 	%{name}-%{version}.tar.bz2
-Patch0:		tuxpaint-0.9.14-Makefile.patch
-Patch1:		tuxpaint-0.9.14-show-build.patch
 Patch2:		tuxpaint-0.9.15b-lin_with_libpng.diff
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
@@ -29,8 +27,6 @@ filesystem isn't exposed (much like programs on PDAs).
 
 %prep
 %setup -q 
-#%patch0 -p1 -b .danny
-#%patch1 -p1 -b .peroyvind
 %patch2 -p0 -b .saispo
 rm -rf `find -name CVS`
 
@@ -44,8 +40,7 @@ make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}"
 
 %find_lang %{name}
 
-mkdir -p %{buildroot}{%{_menudir},%{_datadir}/applications}
-kdedesktop2mdkmenu.pl tuxpaint "Multimedia/Graphics" src/tuxpaint.desktop %{buildroot}%{_menudir}/%{name}
+mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install	--vendor="" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications \
 			--add-category="X-MandrivaLinux-Multimedia-Graphics" \
@@ -87,7 +82,6 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
 %{_datadir}/%{name}
-%{_menudir}/%{name}
 %{_datadir}/applnk/Graphics/tuxpaint.desktop
 #%{_datadir}/gnome/apps/Graphics/tuxpaint.desktop
 %{_datadir}/applications/tuxpaint.desktop
@@ -97,5 +91,3 @@ rm -rf %{buildroot}
 %{_miconsdir}/*.png
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
-
-
