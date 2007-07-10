@@ -42,7 +42,8 @@ make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}"
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install	--vendor="" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications \
-			--add-category="Education;Art;" \
+			--add-category="Education" \
+			--add-category="Art" \
 			src/tuxpaint.desktop
 
 install -m644 data/images/icon16x16.png -D %{buildroot}%{_miconsdir}/%{name}.png
