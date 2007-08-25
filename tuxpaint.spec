@@ -7,6 +7,7 @@ Epoch:		1
 License:	GPL
 Source: 	%{name}-%{version}.tar.bz2
 Patch2:		tuxpaint-0.9.15b-lin_with_libpng.diff
+Patch3:		tuxpaint-0.9.17-fix-commnet-lang.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -27,6 +28,7 @@ filesystem isn't exposed (much like programs on PDAs).
 %prep
 %setup -q 
 %patch2 -p0 -b .saispo
+%patch3 -p0
 sed -i -e 's|-I/usr/lib/glib-2.0|-I/usr/%{_lib}/glib-2.0|' Makefile
 
 %build
