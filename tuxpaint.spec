@@ -1,7 +1,7 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
 Version:	0.9.17
-Release:	%mkrel 1
+Release:	%mkrel 2
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPL
