@@ -1,13 +1,14 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
 Version:	0.9.17
-Release:	%mkrel 2
+Release:	%mkrel 3
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPL
 Source: 	%{name}-%{version}.tar.bz2
 Patch2:		tuxpaint-0.9.15b-lin_with_libpng.diff
 Patch3:		tuxpaint-0.9.17-fix-commnet-lang.patch
+Patch4:		tuxpaint-0.9.17-fix-print.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -29,6 +30,7 @@ filesystem isn't exposed (much like programs on PDAs).
 %setup -q 
 %patch2 -p0 -b .saispo
 %patch3 -p0
+%patch4 -p1
 sed -i -e 's|-I/usr/lib/glib-2.0|-I/usr/%{_lib}/glib-2.0|' Makefile
 
 %build
