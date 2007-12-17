@@ -11,7 +11,6 @@ Patch3:		tuxpaint-0.9.17-fix-commnet-lang.patch
 Patch4:		tuxpaint-0.9.17-fix-print.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:  png-devel freetype2-devel cairo-devel librsvg-devel
 BuildRequires:	gettext desktop-file-utils libpaper-devel kdelibs-common
 BuildRequires:	SDL-devel SDL_mixer-devel SDL_ttf-devel SDL_image-devel
