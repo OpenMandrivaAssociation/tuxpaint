@@ -1,7 +1,10 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
-Version:	0.9.17
-Release:	%mkrel 3
+Version:	0.9.19
+Release:	%mkrel 1
+%define major   0
+%define libname %mklibname %{name} %major
+%define libnamedev %mklibname %{name} -d
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPL
@@ -26,11 +29,21 @@ tool, for special effects. Loading and saving is done via a
 graphical interface, and the underlying environment's 
 filesystem isn't exposed (much like programs on PDAs).
 
+%package -n %libnamedev
+Summary: Headers and development libraries from %{name}
+Group: Development/Other
+Requires: %libname = %{epoch}:%{version}-%{release}
+Provides: lib%{name}-devel = %{epoch}:%{version}-%{release}
+Provides: %name-devel = %{epoch}:%{version}-%{release}
+
+%description -n %libnamedev
+%{name} development headers and libraries.
+
 %prep
 %setup -q 
 %patch2 -p0 -b .saispo
 %patch3 -p0
-%patch4 -p1
+#%patch4 -p1
 sed -i -e 's|-I/usr/lib/glib-2.0|-I/usr/%{_lib}/glib-2.0|' Makefile
 
 %build
@@ -94,3 +107,11 @@ rm -rf %{buildroot}
 %{_miconsdir}/*.png
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
+
+%files -n %libnamedev
+%defattr(-,root,root)
+%_docdir/*
+%{_bindir}/tp-magic-config
+%{_libdir}/%{name}/plugins/*.so
+%{_includedir}/%{name}/*.h
+%{_mandir}/man1/*
