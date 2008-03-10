@@ -12,6 +12,7 @@ Source: 	%{name}-%{version}.tar.bz2
 Patch2:		tuxpaint-0.9.15b-lin_with_libpng.diff
 Patch3:		tuxpaint-0.9.17-fix-commnet-lang.patch
 Patch4:		tuxpaint-0.9.17-fix-print.patch
+Patch5:		tuxpaint-0.9.19-fix-makefile_lib64.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -44,14 +45,15 @@ Provides: %name-devel = %{epoch}:%{version}-%{release}
 %patch2 -p0 -b .saispo
 %patch3 -p0
 #%patch4 -p1
+%patch5 -p0
 sed -i -e 's|-I/usr/lib/glib-2.0|-I/usr/%{_lib}/glib-2.0|' Makefile
 
 %build
-make OPTFLAGS="%{optflags}" PREFIX=%{_prefix}
+make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
 
 %install
 rm -rf %{buildroot}
-make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}" X11_ICON_PREFIX="%{buildroot}%{_includedir}/X11/pixmaps"
+make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}" X11_ICON_PREFIX="%{buildroot}%{_includedir}/X11/pixmaps" LIBDIR=%{_libdir}
 
 
 %find_lang %{name}
