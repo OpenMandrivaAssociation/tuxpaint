@@ -1,7 +1,7 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
 Version:	0.9.19
-Release:	%mkrel 2
+Release:	%mkrel 3
 %define major   0
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} -d
@@ -21,6 +21,7 @@ BuildRequires:	gettext desktop-file-utils libpaper-devel kdelibs-common
 BuildRequires:	SDL-devel SDL_mixer-devel SDL_ttf-devel SDL_image-devel SDL_Pango-devel
 #for printing:
 Requires: 	netpbm
+Conflicts:	%libnamedev
 
 %description
 Tux Paint is a simple paint program gear towards young children. 
@@ -30,14 +31,12 @@ tool, for special effects. Loading and saving is done via a
 graphical interface, and the underlying environment's 
 filesystem isn't exposed (much like programs on PDAs).
 
-%package -n %libnamedev
+%package devel
 Summary: Headers and development libraries from %{name}
 Group: Development/Other
-Requires: %libname = %{epoch}:%{version}-%{release}
-Provides: lib%{name}-devel = %{epoch}:%{version}-%{release}
-Provides: %name-devel = %{epoch}:%{version}-%{release}
+Obsoletes: %libnamedev
 
-%description -n %libnamedev
+%description devel
 %{name} development headers and libraries.
 
 %prep
@@ -88,20 +87,20 @@ rm -rf %{buildroot}
 
 %postun
 %{clean_menus}
-#/sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(755,root,root,755)
 %{_bindir}/%{name}
 %{_bindir}/%{name}-import
 %defattr(644,root,root,755)
-%doc docs/*
+%doc %_datadir/doc/tuxpaint
 %{_mandir}/man1/%{name}.1*
 %{_mandir}/man1/%{name}-import.1*
 %lang(pl) %{_mandir}/pl/man1/%{name}.1*
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
 %{_datadir}/%{name}
+%{_libdir}/%{name}
 %{_datadir}/applications/tuxpaint.desktop
 %{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/pixmaps/*png
@@ -110,10 +109,9 @@ rm -rf %{buildroot}
 %{_iconsdir}/*.png
 %{_liconsdir}/*.png
 
-%files -n %libnamedev
+%files devel
 %defattr(-,root,root)
-%_docdir/*
+%doc %_datadir/doc/tuxpaint-dev
 %{_bindir}/tp-magic-config
-%{_libdir}/%{name}/plugins/*.so
 %{_includedir}/%{name}/*.h
-%{_mandir}/man1/*
+%{_mandir}/man1/tp-magic-config.1*
