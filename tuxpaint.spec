@@ -93,7 +93,7 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}
 %{_bindir}/%{name}-import
 %defattr(644,root,root,755)
-%doc %_datadir/doc/tuxpaint
+%doc docs/*
 %{_mandir}/man1/%{name}.1*
 %{_mandir}/man1/%{name}-import.1*
 %lang(pl) %{_mandir}/pl/man1/%{name}.1*
