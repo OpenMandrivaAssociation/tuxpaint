@@ -81,11 +81,15 @@ rm -Rf %{buildroot}/%{_datadir}/%{name}/images/icon32x32.xpm
 %clean
 rm -rf %{buildroot}
 
+%if %mdkversion < 200900
 %post
 %{update_menus}
+%endif
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus}
+%endif
 
 %files -f %{name}.lang
 %defattr(755,root,root,755)
