@@ -83,7 +83,6 @@ rm -rf %{buildroot}
 
 %post
 %{update_menus}
-#/sbin/ldconfig
 
 %postun
 %{clean_menus}
