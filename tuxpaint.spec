@@ -1,18 +1,16 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
-Version:	0.9.19
-Release:	%mkrel 3
+Version:	0.9.20
+Release:	%mkrel 1
 %define major   0
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} -d
 #newer than 9.0 cvs build:
 Epoch:		1
-License:	GPL
-Source: 	%{name}-%{version}.tar.bz2
-Patch2:		tuxpaint-0.9.15b-lin_with_libpng.diff
-Patch3:		tuxpaint-0.9.17-fix-commnet-lang.patch
-Patch4:		tuxpaint-0.9.17-fix-print.patch
-Patch5:		tuxpaint-0.9.19-fix-makefile_lib64.patch
+License:	GPLv2+
+Source: 	%{name}-%{version}.tar.gz
+Patch2:		tuxpaint-0.9.20-lin_with_libpng.diff
+Patch5:		tuxpaint-0.9.20-fix-makefile_lib64.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -41,11 +39,8 @@ Obsoletes: %libnamedev
 
 %prep
 %setup -q 
-%patch2 -p0 -b .saispo
-%patch3 -p0
-#%patch4 -p1
+%patch2 -p0
 %patch5 -p0
-sed -i -e 's|-I/usr/lib/glib-2.0|-I/usr/%{_lib}/glib-2.0|' Makefile
 
 %build
 make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
@@ -60,6 +55,7 @@ make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}"
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install	--vendor="" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications \
+			--remove-category=" Art" \
 			--add-category="Education" \
 			--add-category="Art" \
 			src/tuxpaint.desktop
