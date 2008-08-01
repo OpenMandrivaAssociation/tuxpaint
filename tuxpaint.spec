@@ -15,7 +15,7 @@ Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:  png-devel freetype2-devel cairo-devel librsvg-devel
-BuildRequires:	gettext desktop-file-utils libpaper-devel kdelibs-common
+BuildRequires:	gettext desktop-file-utils libpaper-devel
 BuildRequires:	SDL-devel SDL_mixer-devel SDL_ttf-devel SDL_image-devel SDL_Pango-devel
 #for printing:
 Requires: 	netpbm
@@ -64,7 +64,6 @@ install -m644 data/images/icon16x16.png -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 data/images/icon32x32.png -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 data/images/icon48x48.png -D %{buildroot}%{_liconsdir}/%{name}.png
 
-#rm -f $RPM_BUILD_ROOT/%_datadir/%name/images/icon*x*.png $RPM_BUILD_ROOT/%_datadir/%{name}/images/icon-win32.png
 rm -Rf %{buildroot}%{_datadir}/applnk
 
 #Fix perms:
@@ -101,7 +100,6 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 %{_libdir}/%{name}
 %{_datadir}/applications/tuxpaint.desktop
-%{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/pixmaps/*png
 %{_includedir}/X11/pixmaps/tuxpaint.xpm
 %{_miconsdir}/*.png
