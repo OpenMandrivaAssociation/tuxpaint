@@ -1,7 +1,7 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
 Version:	0.9.20
-Release:	%mkrel 2
+Release:	%mkrel 3
 %define major   0
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} -d
@@ -42,7 +42,7 @@ Obsoletes: %libnamedev
 %setup -q 
 %patch2 -p0
 %patch5 -p0
-%patch6 -p0
+#patch6 -p0
 
 %build
 make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
