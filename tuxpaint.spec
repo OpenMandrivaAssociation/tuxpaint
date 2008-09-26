@@ -1,7 +1,7 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
 Version:	0.9.20
-Release:	%mkrel 1
+Release:	%mkrel 2
 %define major   0
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} -d
@@ -11,6 +11,7 @@ License:	GPLv2+
 Source: 	%{name}-%{version}.tar.gz
 Patch2:		tuxpaint-0.9.20-lin_with_libpng.diff
 Patch5:		tuxpaint-0.9.20-fix-makefile_lib64.patch
+Patch6:		tuxpaint-0.9.20-use-system-font.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -41,6 +42,7 @@ Obsoletes: %libnamedev
 %setup -q 
 %patch2 -p0
 %patch5 -p0
+%patch6 -p0
 
 %build
 make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
