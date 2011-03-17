@@ -9,9 +9,8 @@ Release:	%mkrel 1
 Epoch:		1
 License:	GPLv2+
 Source: 	%{name}-%{version}.tar.gz
-Patch2:		tuxpaint-0.9.20-lin_with_libpng.diff
-Patch5:		tuxpaint-0.9.20-fix-makefile_lib64.patch
-Patch6:		tuxpaint-0.9.20-use-system-font.patch
+Patch0:		tuxpaint-0.9.20-lin_with_libpng.diff
+Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -21,6 +20,8 @@ BuildRequires:	SDL-devel SDL_mixer-devel SDL_ttf-devel SDL_image-devel SDL_Pango
 BuildRequires:	fribidi-devel
 #for printing:
 Requires: 	netpbm
+Suggests:	tuxpaint-config
+Suggests:	tuxpaint-stamps
 Conflicts:	%libnamedev
 
 %description
@@ -41,9 +42,8 @@ Obsoletes: %libnamedev
 
 %prep
 %setup -q 
-%patch2 -p0
-%patch5 -p0
-#patch6 -p0
+%patch0 -p0
+%patch1 -p0
 
 %build
 make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
@@ -58,9 +58,7 @@ make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}"
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install	--vendor="" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications \
-			--remove-category=" Art" \
-			--add-category="Education" \
-			--add-category="Art" \
+			--remove-category="Art" \
 			src/tuxpaint.desktop
 
 install -m644 data/images/icon16x16.png -D %{buildroot}%{_miconsdir}/%{name}.png
@@ -72,7 +70,7 @@ rm -Rf %{buildroot}%{_datadir}/applnk
 #Fix perms:
 chmod -R go+r docs/
 
-#Remove docs placed by an idiotic makefile
+#Remove useless installed things 
 rm -Rf %{buildroot}/%{_datadir}/doc/%{name}
 rm -Rf %{buildroot}/%{_datadir}/%{name}/images/icon32x32.xpm
 
