@@ -1,7 +1,7 @@
 Summary:	Simple and fun paint program for kids
 Name: 		tuxpaint
 Version:	0.9.21
-Release:	%mkrel 1
+Release:	%mkrel 2
 %define major   0
 %define libname %mklibname %{name} %major
 %define libnamedev %mklibname %{name} -d
