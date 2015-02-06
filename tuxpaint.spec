@@ -5,7 +5,7 @@
 Summary:	Simple and fun paint program for kids
 Name:		tuxpaint
 Version:	0.9.22
-Release:	1
+Release:	2
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPLv2+
