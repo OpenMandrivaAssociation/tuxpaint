@@ -12,9 +12,8 @@ License:	GPLv2+
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
 Source0:	http://softlayer-ams.dl.sourceforge.net/project/tuxpaint/tuxpaint/%{version}/%{name}-%{version}.tar.gz
-Patch0:		tuxpaint-0.9.20-lin_with_libpng.diff
+Source100:	%{name}.rpmlintrc
 Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
-Patch2:		tuxpaint-0.9.21-libpng15.patch
 BuildRequires:	gettext
 BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(cairo)
@@ -23,7 +22,7 @@ BuildRequires:	pkgconfig(fribidi)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	libpaper-devel
-BuildRequires:	SDL-devel
+BuildRequires:	SDL12-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_ttf-devel
 BuildRequires:	SDL_image-devel
@@ -51,10 +50,8 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 %{name} development headers and libraries.
 
 %prep
-%setup -q 
-%patch0 -p0
-%patch1 -p0
-%patch2 -p1
+%setup -q
+%apply_patches
 # Fix unreadable files
 find . -perm 0600 -exec chmod 0644 '{}' \;
 
@@ -94,6 +91,7 @@ rm -Rf %{buildroot}%{_datadir}/%{name}/images/icon32x32.xpm
 %lang(pl) %{_mandir}/pl/man1/%{name}.1*
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
+%{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
 %{_datadir}/%{name}
 %{_libdir}/%{name}
 %{_datadir}/applications/tuxpaint.desktop
