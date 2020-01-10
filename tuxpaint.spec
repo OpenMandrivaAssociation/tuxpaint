@@ -52,7 +52,7 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 # Fix unreadable files
 find . -perm 0600 -exec chmod 0644 '{}' \;
 
