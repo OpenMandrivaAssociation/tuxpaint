@@ -53,16 +53,20 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 %prep
 %setup -q
 %autopatch -p1
-# Fix unreadable files
-find . -perm 0600 -exec chmod 0644 '{}' \;
 
 %build
-make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
+%make_build OPTFLAGS="%{optflags}" LDFLAGS="%ldflags" PREFIX=%{_prefix} MAGIC_PREFIX=%{_libdir}/%{name}/plugins
 
 %install
-make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}" X11_ICON_PREFIX="%{buildroot}%{_includedir}/X11/pixmaps" LIBDIR=%{_libdir}
+%make_install \
+              PKG_ROOT="%{buildroot}" \
+              PREFIX="%{_usr}" \
+              X11_ICON_PREFIX="%{buildroot}%{_datadir}/pixmaps" \
+              KDE_ICON_PREFIX=%{_iconsdir} \
+              MAGIC_PREFIX=%{buildroot}%{_libdir}/%{name}/plugins \
+              install-kde-icons
 
-%find_lang %{name}
+%find_lang %{name} --with-man
 
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install	--vendor="" \
@@ -70,40 +74,32 @@ desktop-file-install	--vendor="" \
 			--remove-category="Art" \
 			src/tuxpaint.desktop
 
-install -m644 data/images/icon16x16.png -D %{buildroot}%{_miconsdir}/%{name}.png
-install -m644 data/images/icon32x32.png -D %{buildroot}%{_iconsdir}/%{name}.png
-install -m644 data/images/icon48x48.png -D %{buildroot}%{_liconsdir}/%{name}.png
-
-rm -Rf %{buildroot}%{_datadir}/applnk
-
 #Fix perms:
 chmod -R go+r docs/
 
-#Remove useless installed things 
-rm -Rf %{buildroot}%{_datadir}/doc/%{name}
+#Remove useless installed things
+rm -Rf %{buildroot}%{_datadir}/doc/%{name}-%{version}
 rm -Rf %{buildroot}%{_datadir}/%{name}/images/icon32x32.xpm
+rm -rf %{buildroot}%{_datadir}/tuxpaint/fonts/locale/zh_tw_docs/maketuxfont.py*
 
 %files -f %{name}.lang
+%doc docs/*
+%exclude %{_docdir}/%{name}/Makefile
 %{_bindir}/%{name}
 %{_bindir}/%{name}-import
-%doc docs/*
 %{_mandir}/man1/%{name}.1*
 %{_mandir}/man1/%{name}-import.1*
-%lang(pl) %{_mandir}/pl/man1/%{name}.1*
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
 %{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
-%{_datadir}/%{name}
-%{_libdir}/%{name}
+%{_datadir}/%{name}/
+%{_libdir}/%{name}/
 %{_datadir}/applications/tuxpaint.desktop
-%{_datadir}/pixmaps/*png
-%{_includedir}/X11/pixmaps/tuxpaint.xpm
-%{_miconsdir}/*.png
-%{_iconsdir}/*.png
-%{_liconsdir}/*.png
+%{_datadir}/pixmaps/*
+%{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_iconsdir}/hicolor/*/apps/%{name}.svg
 
 %files devel
-%doc %{_datadir}/doc/tuxpaint-dev
 %{_bindir}/tp-magic-config
-%{_includedir}/%{name}/*.h
+%{_includedir}/%{name}/
 %{_mandir}/man1/tp-magic-config.1*
