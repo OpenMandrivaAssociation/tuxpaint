@@ -1,3 +1,6 @@
+%define _disable_ld_no_undefined 1
+%define _disable_lto 1
+
 %define major   0
 %define libname %mklibname %{name} %{major}
 %define libnamedev %mklibname %{name} -d
@@ -55,6 +58,8 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 %autopatch -p1
 
 %build
+export CC=gcc
+export CXX=g++
 %make_build OPTFLAGS="%{optflags}" LDFLAGS="%ldflags" PREFIX=%{_prefix} MAGIC_PREFIX=%{_libdir}/%{name}/plugins
 
 %install
