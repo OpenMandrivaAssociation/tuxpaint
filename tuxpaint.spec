@@ -58,8 +58,8 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 %autopatch -p1
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %make_build OPTFLAGS="%{optflags}" LDFLAGS="%ldflags" PREFIX=%{_prefix} MAGIC_PREFIX=%{_libdir}/%{name}/plugins
 
 %install
