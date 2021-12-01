@@ -31,6 +31,7 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_ttf-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_Pango-devel
+BuildRequires:	pkgconfig(SDL_gfx)
 #for printing:
 Requires:	netpbm
 Suggests:	tuxpaint-config
