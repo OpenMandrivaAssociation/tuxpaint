@@ -7,14 +7,14 @@
 
 Summary:	Simple and fun paint program for kids
 Name:		tuxpaint
-Version:	0.9.25
+Version:	0.9.27
 Release:	1
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://www.newbreedsoftware.com/tuxpaint/
-Source0:	http://softlayer-ams.dl.sourceforge.net/project/tuxpaint/tuxpaint/%{version}/%{name}-%{version}.tar.gz
+Source0:	https://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/tuxpaint-%{version}.tar.gz
 Source100:	%{name}.rpmlintrc
 
 BuildRequires:	gettext
