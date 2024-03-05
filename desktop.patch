@@ -1,0 +1,15 @@
+--- a/Makefile~	2023-04-01 18:47:48.000000000 -0500
++++ b/Makefile	2023-04-03 11:48:29.528367668 -0500
+@@ -994,9 +994,9 @@
+ 	  xdg-desktop-menu install tux4kids-tuxpaint-fullscreen.desktop ; \
+ 	  rm ./tux4kids-tuxpaint-fullscreen.desktop ; \
+ 	fi
+-	@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
+-	  update-desktop-database ; \
+-	fi
++	#@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
++	#  update-desktop-database ; \
++	#fi
+ 	install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml
+ #do package path related stuff, ie use destdir
+ 

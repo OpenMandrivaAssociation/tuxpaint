@@ -4,8 +4,8 @@
  
  # Magic Tool plug-ins
  INCLUDE_PREFIX:=$(DESTDIR)$(PREFIX)/include
--MAGIC_PREFIX:=$(DESTDIR)$(LIBDIR)/lib/tuxpaint/plugins
+-MAGIC_PREFIX:=$(DESTDIR)$(LIBDIR)/lib$(LIBDIRSUFFIX)/tuxpaint/plugins
 +MAGIC_PREFIX:=$(DESTDIR)$(LIBDIR)/tuxpaint/plugins
  
- 
  # Docs and man page:
+ DOC_PREFIX:=$(DESTDIR)$(PREFIX)/share/doc/tuxpaint-$(VER_VERSION)
