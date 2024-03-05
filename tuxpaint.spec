@@ -17,6 +17,7 @@ Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
 Patch2:		desktop.patch
 BuildRequires:	gettext
 BuildRequires:	gperf
+BuildRequires:	imagemagick
 BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(freetype2)
