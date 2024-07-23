@@ -4,14 +4,14 @@
 
 Summary:	Simple and fun paint program for kids
 Name:		tuxpaint
-Version:	0.9.32
+Version:	0.9.33
 Release:	1
 #newer than 9.0 cvs build:
 Epoch:		1
 License:	GPLv2+
 Group:		Graphics
-URL:		http://www.newbreedsoftware.com/tuxpaint/
-Source0:	http://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/%{name}-%{version}.tar.gz
+URL:		https://www.newbreedsoftware.com/tuxpaint/
+Source0:	https://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/%{name}-%{version}.tar.gz
 Source100:	%{name}.rpmlintrc
 Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
 Patch2:		desktop.patch
@@ -96,7 +96,7 @@ rm -Rf %{buildroot}%{_datadir}/%{name}/images/icon32x32.xpm
 %{_mandir}/*/man1/%{name}.1*
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
-%{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
+%{_sysconfdir}/bash_completion.d/010_tuxpaint-completion.bash
 %{_datadir}/%{name}
 %{_libdir}/%{name}
 %{_datadir}/applications/tuxpaint.desktop
