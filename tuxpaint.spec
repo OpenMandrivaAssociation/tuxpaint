@@ -96,7 +96,7 @@ rm -Rf %{buildroot}%{_datadir}/%{name}/images/icon32x32.xpm
 %{_mandir}/*/man1/%{name}.1*
 %dir %{_sysconfdir}/tuxpaint
 %config(noreplace) %{_sysconfdir}/tuxpaint/tuxpaint.conf
-%{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
+#{_sysconfdir}/bash_completion.d/tuxpaint-completion.bash
 %{_datadir}/%{name}
 %{_libdir}/%{name}
 %{_datadir}/applications/tuxpaint.desktop
