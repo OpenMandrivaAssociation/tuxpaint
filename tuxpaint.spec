@@ -13,7 +13,7 @@ Group:		Graphics
 URL:		https://www.newbreedsoftware.com/tuxpaint/
 Source0:	https://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/%{name}-%{version}.tar.gz
 Source100:	%{name}.rpmlintrc
-Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
+#Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
 Patch2:		desktop.patch
 BuildRequires:	gettext
 BuildRequires:	gperf
