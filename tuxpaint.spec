@@ -15,6 +15,7 @@ Source0:	https://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/%{n
 Source100:	%{name}.rpmlintrc
 #Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
 #Patch2:		desktop.patch
+BuildRequires:	make
 BuildRequires:	gettext
 BuildRequires:	gperf
 BuildRequires:	imagemagick
