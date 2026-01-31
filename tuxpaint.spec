@@ -13,9 +13,11 @@ Group:		Graphics
 URL:		https://www.newbreedsoftware.com/tuxpaint/
 Source0:	https://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/%{name}-%{version}.tar.gz
 Source100:	%{name}.rpmlintrc
-#Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
-#Patch2:		desktop.patch
-BuildRequires:	make
+Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
+# Patch2:		desktop.patch
+
+BuildRequires:  make
+
 BuildRequires:	gettext
 BuildRequires:	gperf
 BuildRequires:	imagemagick
@@ -56,16 +58,18 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 %{name} development headers and libraries.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 # Fix unreadable files
 find . -perm 0600 -exec chmod 0644 '{}' \;
 
 %build
-make OPTFLAGS="%{optflags}" PREFIX=%{_prefix} LIBDIR=%{_libdir}
+%make_build PREFIX=%{_prefix} LIBDIR=%{_libdir}
 
-%install
-make install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" PREFIX="%{_usr}" X11_ICON_PREFIX="%{buildroot}%{_includedir}/X11/pixmaps" LIBDIR=%{_libdir}
+%install 
+%make_install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" \
+	PREFIX="%{_usr}" \
+	X11_ICON_PREFIX="%{buildroot}%{_includedir}/X11/pixmaps" \
+	LIBDIR=%{_libdir}
 
 %find_lang %{name}
 
