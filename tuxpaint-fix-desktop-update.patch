@@ -1,0 +1,16 @@
+diff -up tuxpaint-0.9.35/Makefile.omv tuxpaint-0.9.35/Makefile
+--- tuxpaint-0.9.35/Makefile.omv	2026-01-31 09:33:21.672344234 -0500
++++ tuxpaint-0.9.35/Makefile	2026-01-31 09:35:16.552647623 -0500
+@@ -1060,9 +1060,9 @@ install-xdg: src/tuxpaint.desktop src/tu
+ 	  xdg-desktop-menu install tux4kids-tuxpaint-fullscreen.desktop ; \
+ 	  rm ./tux4kids-tuxpaint-fullscreen.desktop ; \
+ 	fi
+-	@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
+-	  update-desktop-database ; \
+-	fi
++	#@if [ "x$(shell which update-desktop-database)" != "x" ]; then \
++	#  update-desktop-database ; \
++	#fi
+ 	mkdir -p $(METAINFO_PREFIX)
+ 	cp -a src/org.tuxpaint.Tuxpaint.appdata.xml $(METAINFO_PREFIX)
+ 	# ^ Instead of: install --mode=0644 -Dt $(METAINFO_PREFIX) src/org.tuxpaint.Tuxpaint.appdata.xml

@@ -13,8 +13,6 @@ Group:		Graphics
 URL:		https://www.newbreedsoftware.com/tuxpaint/
 Source0:	https://sourceforge.net/projects/tuxpaint/files/tuxpaint/%{version}/%{name}-%{version}.tar.gz
 Source100:	%{name}.rpmlintrc
-Patch1:		tuxpaint-0.9.20-fix-makefile_lib64.patch
-# Patch2:		desktop.patch
 
 BuildRequires:  make
 
@@ -49,6 +47,9 @@ tool, for special effects. Loading and saving is done via a
 graphical interface, and the underlying environment's 
 filesystem isn't exposed (much like programs on PDAs).
 
+%patchlist
+tuxpaint-fix-desktop-update.patch
+
 %package devel
 Summary:	Headers and development libraries from %{name}
 Group:		Development/Other
@@ -67,7 +68,7 @@ find . -perm 0600 -exec chmod 0644 '{}' \;
 
 %install 
 %make_install BUILDPREFIX="%{buildroot}" PKG_ROOT="%{buildroot}" \
-	PREFIX="%{_usr}" \
+	PREFIX="%{_usr}" DESTDIR="%{buildroot}" MAGIC_PREFIX="%{buildroot}/%{_libdir}/%name/plugins" \
 	X11_ICON_PREFIX="%{buildroot}%{_includedir}/X11/pixmaps" \
 	LIBDIR=%{_libdir}
 
