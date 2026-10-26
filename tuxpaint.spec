@@ -62,6 +62,17 @@ Obsoletes:	%{libnamedev} < 1:0.9.21-3
 %autosetup -p1
 # Fix unreadable files
 find . -perm 0600 -exec chmod 0644 '{}' \;
+# C23 strchr() on a const string returns const char *.
+python - << 'PY'
+from pathlib import Path
+p = Path("src/tuxpaint.c")
+t = p.read_text()
+old = "*strchr(short_lang_prefix, '_') = '\\0';"
+new = "*((char *)strchr(short_lang_prefix, '_')) = '\\0';"
+if old not in t:
+    raise SystemExit("tuxpaint strchr assignment not found")
+p.write_text(t.replace(old, new, 1))
+PY
 
 %build
 %make_build PREFIX=%{_prefix} LIBDIR=%{_libdir}
